@@ -1,4 +1,4 @@
-# UWW Health Checker
+# Health Checker
 
 Simple Spring Boot dashboard that monitors website availability and sends email alerts on status transitions.
 
