@@ -1,0 +1,58 @@
+{
+  "groups": [
+    {
+      "name": "monitor",
+      "type": "com.garethyoo.healthchecker.config.MonitoringProperties",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties"
+    },
+    {
+      "name": "monitor.alerts",
+      "type": "com.garethyoo.healthchecker.config.MonitoringProperties$Alerts",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties",
+      "sourceMethod": "public com.garethyoo.healthchecker.config.MonitoringProperties.Alerts getAlerts() "
+    }
+  ],
+  "properties": [
+    {
+      "name": "monitor.alerts.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties$Alerts"
+    },
+    {
+      "name": "monitor.alerts.from",
+      "type": "java.lang.String",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties$Alerts"
+    },
+    {
+      "name": "monitor.alerts.recipients",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties$Alerts"
+    },
+    {
+      "name": "monitor.alerts.send-recovery",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties$Alerts"
+    },
+    {
+      "name": "monitor.check-interval-ms",
+      "type": "java.lang.Long",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties"
+    },
+    {
+      "name": "monitor.connect-timeout",
+      "type": "java.time.Duration",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties"
+    },
+    {
+      "name": "monitor.read-timeout",
+      "type": "java.time.Duration",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties"
+    },
+    {
+      "name": "monitor.targets",
+      "type": "java.util.List<com.garethyoo.healthchecker.config.MonitoringProperties$Target>",
+      "sourceType": "com.garethyoo.healthchecker.config.MonitoringProperties"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Health Checker</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+<main class="container">
+    <header class="header">
+        <h1>Application Health Checker</h1>
+        <p>Monitoring external app availability every 5 minutes with email alerts.</p>
+    </header>
+
+    <div id="status-container"
+         th:attr="hx-get=@{/fragments/status-cards},hx-trigger='load, every ' + ${pollIntervalSeconds} + 's',hx-swap='outerHTML'"
+         th:replace="fragments/status-cards :: statusCards">
+    </div>
+</main>
+</body>
+</html>
