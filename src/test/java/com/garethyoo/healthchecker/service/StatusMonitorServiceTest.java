@@ -2,7 +2,6 @@ package com.garethyoo.healthchecker.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -50,13 +49,13 @@ class StatusMonitorServiceTest {
     }
 
     @Test
-    void doesNotAlertOnFirstDownCheck() {
+    void sendsDownAlertOnFirstDownCheck() {
         when(siteChecker.check(any(), any(URI.class)))
                 .thenReturn(new SiteCheckResult(false, 503, 80, "HTTP 503", Instant.now()));
 
         statusMonitorService.refreshAll();
 
-        verify(emailAlertService, never()).sendDownAlert(any());
+        verify(emailAlertService, times(1)).sendDownAlert(any());
         assertThat(statusMonitorService.getStatuses().getFirst().state()).isEqualTo(ServiceState.DOWN);
     }
 }

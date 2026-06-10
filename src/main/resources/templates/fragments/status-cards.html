@@ -1,4 +1,7 @@
-<div id="status-container" th:fragment="statusCards" class="grid">
+<div id="status-container"
+    th:fragment="statusCards"
+    class="grid"
+    th:attr="hx-get=@{/fragments/status-cards},hx-trigger='load, every ' + ${pollIntervalSeconds} + 's',hx-swap='outerHTML'">
     <article class="card" th:each="status : ${statuses}">
         <div class="row">
             <span class="indicator"

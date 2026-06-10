@@ -2,14 +2,12 @@ server:
   port: 8080
 
 monitor:
-  check-interval-ms: 300000
+  check-interval-ms: 60000
   connect-timeout: 5s
   read-timeout: 10s
   targets:
     - name: abc
-      url: https://www.google.com
-    - name: zyx
-      url: https://www.bbc.com
+      url: http://localhost:8000  
   alerts:
     enabled: true
     send-recovery: true

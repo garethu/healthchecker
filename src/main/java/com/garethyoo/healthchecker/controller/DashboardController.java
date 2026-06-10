@@ -27,6 +27,7 @@ public class DashboardController {
     @GetMapping("/fragments/status-cards")
     public String statusCards(Model model) {
         model.addAttribute("statuses", statusMonitorService.getStatuses());
+        model.addAttribute("pollIntervalSeconds", Math.max(1, properties.getCheckIntervalMs() / 1000));
         return "fragments/status-cards :: statusCards";
     }
 }

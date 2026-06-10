@@ -95,14 +95,33 @@ public class StatusMonitorService {
             );
             latestStatuses.put(target.getName(), status);
 
-            ServiceState previous = previousStates.put(target.getName(), state);
-            if (previous != null) {
-                if (previous == ServiceState.UP && state == ServiceState.DOWN) {
-                    emailAlertService.sendDownAlert(status);
+                if (state == ServiceState.DOWN) {
+                logger.warn(
+                    "Health check DOWN for {} (url={} statusCode={} responseMs={} details={})",
+                    status.name(),
+                    status.url(),
+                    status.statusCode(),
+                    status.responseTimeMs(),
+                    status.details()
+                );
+                } else {
+                logger.info(
+                    "Health check UP for {} (url={} statusCode={} responseMs={} details={})",
+                    status.name(),
+                    status.url(),
+                    status.statusCode(),
+                    status.responseTimeMs(),
+                    status.details()
+                );
                 }
-                if (previous == ServiceState.DOWN && state == ServiceState.UP && properties.getAlerts().isSendRecovery()) {
-                    emailAlertService.sendRecoveryAlert(status);
-                }
+
+            previousStates.put(target.getName(), state);
+
+            // TODO: Testing-only override. Remove this and restore transition-based alerts.
+            if (state == ServiceState.DOWN) {
+                emailAlertService.sendDownAlert(status);
+            } else if (state == ServiceState.UP) {
+                emailAlertService.sendRecoveryAlert(status);
             }
         } catch (Exception ex) {
             logger.error("Failed processing target {}", target.getName(), ex);
@@ -116,6 +135,14 @@ public class StatusMonitorService {
                     Instant.now()
             );
             latestStatuses.put(target.getName(), fallback);
+                    logger.warn(
+                        "Health check DOWN for {} (url={} statusCode={} responseMs={} details={})",
+                        fallback.name(),
+                        fallback.url(),
+                        fallback.statusCode(),
+                        fallback.responseTimeMs(),
+                        fallback.details()
+                    );
         }
     }
 }
